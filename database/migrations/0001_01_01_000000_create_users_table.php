@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+
+            // Required fields
             $table->string('name');
+            $table->string('surname');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone');
+            $table->string('country');
+            $table->enum('gender', ['male', 'female', 'other']);
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+
+            // Optional profile image
+            $table->string('profile_image')->nullable();
+
+            $table->softDeletes(); // Soft delete support
+            $table->timestamps();  // created_at and updated_at
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
